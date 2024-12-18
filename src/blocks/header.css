@@ -1,0 +1,27 @@
+.header {
+  max-width: 880px;
+  width: 100%;
+  margin: auto;
+}
+.header__image {
+  margin: 45px 0 0;
+  width: 173px;
+  height: 33px;
+}
+
+.header__line {
+  margin: 41px 0 40px;
+  background-color: #ffffff7b;
+  height: 2px;
+}
+@media screen and (max-width: 768px) {
+  .header__image {
+    margin-left: 40px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .header__image {
+    margin-left: 27px;
+  }
+}
