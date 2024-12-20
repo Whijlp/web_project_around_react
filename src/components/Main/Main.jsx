@@ -1,12 +1,30 @@
+import { useState } from "react";
 import avatar from "../../images/jacques-cousteau.jpg";
 import lapiz from "../../images/Edit_profile.png";
 import cruz from "../../images/boton_cruz.png";
+import EditProfile from "./Popup/EditProfile/EditProfile";
+import NewCard from "./Popup/Newcard/NewCard";
+import EditAvatar from "./Popup/EditAvatar/EditAvatar";
 
 const Main = () => {
+  const [popup, setPopup] = useState(null);
+  const editProfile = { title: "Editar Perfil", children: <EditProfile /> };
+  const newCard = { title: "Nuevo lugar", children: <NewCard /> };
+  const editAvatar = {
+    title: "Cambiar Foto de Perfil",
+    children: <EditAvatar />,
+  };
+  const HandleOpenPopUp = () => {
+    setPopup(popup);
+  };
+
   return (
     <main className="content">
       <section className="profile">
-        <button className="profile_avatar">
+        <button
+          className="profile_avatar"
+          onClick={() => HandleOpenPopUp(editAvatar)}
+        >
           <img
             className="profile__edit-avatar"
             src={lapiz}
@@ -20,7 +38,11 @@ const Main = () => {
             <h2 className="profile__title">Jacques Cousteau</h2>
             <p className="profile__subtitle">Explorador</p>
           </div>
-          <button className="profile__edit-button" title="Editar perfil">
+          <button
+            className="profile__edit-button"
+            title="Editar perfil"
+            onClick={() => HandleOpenPopUp(editProfile)}
+          >
             <img
               className="profile__edit-image"
               src={lapiz}
@@ -28,55 +50,17 @@ const Main = () => {
             />
           </button>
         </div>
-        <button className="profile__add-button" title="Crear tarjeta">
+        <button
+          className="profile__add-button"
+          title="Crear tarjeta"
+          onClick={() => HandleOpenPopUp(newCard)}
+        >
           <img
             className="profile__image-button"
             src={cruz}
             alt="cruz de boton"
           />
         </button>
-        <dialog className="form__dialog" id="avatar_edit-profile">
-          <div className="forms">
-            <h2 className="forms__title">Cambiar foto de perfil</h2>
-            <form className="form" id="form_edit-avatar">
-              <fieldset className="form__edit">
-                <input
-                  required
-                  name="avatar"
-                  className="form__input"
-                  type="url"
-                  id="avatar"
-                  placeholder="foto de perfil"
-                  minlength="2"
-                />
-                <span
-                  name="name-error"
-                  id="avatar-error"
-                  className="form__input-error-span"
-                ></span>
-                <button
-                  disabled
-                  className="forms__submit-button"
-                  id="perfil-button"
-                  title="Guardar cambios"
-                >
-                  Guardar
-                </button>
-              </fieldset>
-            </form>
-            <button
-              className="forms__close-button close__button forms-profile-button"
-              title="cerrar"
-              type="button"
-            >
-              <img
-                className="forms__image-button"
-                src="./images/formn_image.svg"
-                alt="imagen de una X"
-              />
-            </button>
-          </div>
-        </dialog>
       </section>
       <section className="elements">
         <template id="card-template">
@@ -107,64 +91,7 @@ const Main = () => {
           </button>
         </dialog>
       </section>
-      <dialog className="form__dialog" id="popup__new-places">
-        <div className="forms">
-          <h2 className="forms__title">Nueva Tarjeta</h2>
-          <form className="form" id="create-card">
-            <fieldset className="form__edit">
-              <input
-                required
-                name="titulo"
-                className="form__input"
-                type="text"
-                id="titulo"
-                placeholder="Nueva tarjeta"
-                minlength="2"
-                maxlength="30"
-              />
-              <span
-                name="titulo-error"
-                id="titulo-error"
-                className="form__input-error-span"
-              ></span>
-              <input
-                required
-                name="photo_info"
-                className="form__input"
-                type="url"
-                id="photo_info"
-                placeholder="Enlace de la imagen"
-              />
-              <span
-                name="photo_info-error"
-                id="photo_info-error"
-                className="form__input-error-span"
-              ></span>
-            </fieldset>
-            <button
-              disabled
-              className="forms__submit-button"
-              type="submit"
-              title="Crear tarjeta nueva "
-              id="create-button"
-            >
-              Crear
-            </button>
-            <button
-              className="forms__close-button close__button"
-              id="place-close-button"
-              title="cerrar"
-              type="button"
-            >
-              <img
-                className="forms__image-button"
-                src="./images/formn_image.svg"
-                alt="imagen de una X"
-              />
-            </button>
-          </form>
-        </div>
-      </dialog>
+
       <dialog className="form__dialog popup_confirmation">
         <div className="forms">
           <h2 className="forms__title">¿Estás seguro/a?</h2>
@@ -190,65 +117,11 @@ const Main = () => {
         </div>
       </dialog>
 
-      <div className="popup" id="popupProfile">
-        <div className="popup__overlay"></div>
-        <div className="forms">
-          <h2 className="forms__title">Editar perfil</h2>
-          <form className="form" id="form_edit-profile">
-            <fieldset className="form__edit">
-              <input
-                required
-                name="name"
-                className="form__input"
-                type="text"
-                id="nombre"
-                placeholder="Nombre"
-                minlength="2"
-                maxlength="40"
-              />
-              <span
-                name="name-error"
-                id="name-error"
-                className="form__input-error-span"
-              ></span>
-              <input
-                required
-                className="form__input"
-                type="text"
-                id="job_info"
-                name="job_info"
-                placeholder="Descripcion"
-                minlength="2"
-                maxlength="200"
-              />
-              <span
-                name="job_info-error"
-                id="job_info-error"
-                className="form__input-error-span"
-              ></span>
-            </fieldset>
-            <button
-              disabled
-              className="forms__submit-button"
-              id="perfil-button"
-              title="Guardar cambios"
-            >
-              Guardar
-            </button>
-            <button
-              className="forms__close-button close__button forms-profile-button"
-              title="cerrar"
-              type="button"
-            >
-              <img
-                className="forms__image-button"
-                src="./images/formn_image.svg"
-                alt="imagen de una X"
-              />
-            </button>
-          </form>
-        </div>
-      </div>
+      {popup && (
+        <Popup key={popup._id} onClose={handleClosePopup} title={popup.title}>
+          {popup.children}
+        </Popup>
+      )}
     </main>
   );
 };
