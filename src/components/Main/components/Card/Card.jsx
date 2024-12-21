@@ -1,8 +1,9 @@
+import trash from "../../../../images/Trash.png";
 const Card = (props) => {
   const { name, link, isLiked } = props.card;
 
   return (
-    <div className="element">
+    <div>
       <img className="element__image" src={link} alt={name} />
       <div className="element__text">
         <p className="element__title"> {name} </p>
@@ -12,9 +13,10 @@ const Card = (props) => {
           type="button"
         ></button>
         <button className="element__trash" title="eliminar" id="delete_button">
-          <img src="./images/Trash.png" alt="imagen de basurera" />
+          <img src={trash} alt="imagen de basurera" />
         </button>
       </div>
     </div>
   );
 };
+export default Card;

@@ -6,6 +6,7 @@ import EditProfile from "./Popup/EditProfile/EditProfile";
 import NewCard from "./Popup/Newcard/NewCard";
 import EditAvatar from "./Popup/EditAvatar/EditAvatar";
 import Popup from "./Popup/Popup";
+import Card from "../Main/components/Card/Card";
 
 const cards = [
   {
@@ -88,22 +89,11 @@ const Main = () => {
         </button>
       </section>
       <section className="elements">
-        <template id="card-template">
-          <div className="element">
-            <img className="element__image" src="" alt="foto de moto" />
-            <div className="element__text">
-              <p className="element__title"></p>
-              <div className="element__like"></div>
-              <button
-                className="element__trash"
-                title="eliminar"
-                id="delete_button"
-              >
-                <img src="./images/Trash.png" alt="imagen de basurera" />
-              </button>
-            </div>
-          </div>
-        </template>
+        <div className="element">
+          {cards.map((card) => (
+            <Card key={card._id} card={card} />
+          ))}
+        </div>
         <dialog className="popup_dialog">
           <img className="popup__img" src="" alt="" />
           <div className="popup__description"></div>
