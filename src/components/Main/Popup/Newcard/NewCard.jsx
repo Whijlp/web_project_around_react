@@ -23,7 +23,7 @@ const NewCard = () => {
           className="form__input"
           type="url"
           id="photo_info"
-          placeHolder="Enlace de la imagen"
+          placeholder="Enlace de la imagen"
         />
         <span
           name="photo_info-error"

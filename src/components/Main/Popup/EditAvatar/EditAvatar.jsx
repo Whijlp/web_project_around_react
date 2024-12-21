@@ -8,8 +8,8 @@ const EditAvatar = () => {
           className="form__input"
           type="url"
           id="avatar"
-          placeHolder="foto de perfil"
-          minlength="2"
+          placeholder="foto de perfil"
+          minLength="2"
         />
         <span
           name="name-error"

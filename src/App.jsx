@@ -6,7 +6,7 @@ function App() {
     <>
       <div className="page">
         <Header />
-        <Main></Main>
+        <Main />
         <Footer />
       </div>
     </>
