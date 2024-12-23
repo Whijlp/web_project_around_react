@@ -7,6 +7,7 @@ import NewCard from "./Popup/Newcard/NewCard";
 import EditAvatar from "./Popup/EditAvatar/EditAvatar";
 import Popup from "./Popup/Popup";
 import Card from "../Main/components/Card/Card";
+import ImagePopup from "./Popup/ImagePopup/ImagePopup";
 
 const cards = [
   {
@@ -89,48 +90,11 @@ const Main = () => {
         </button>
       </section>
       <section className="elements">
-        <div className="element">
-          {cards.map((card) => (
-            <Card key={card._id} card={card} />
-          ))}
-        </div>
-        <dialog className="popup_dialog">
-          <img className="popup__img" src="" alt="" />
-          <div className="popup__description"></div>
-          <button className="close__button popup__close-button" title="cerrar">
-            <img
-              className="forms__image-button"
-              src="./images/formn_image.svg"
-              alt="imagen de una X"
-            />
-          </button>
-        </dialog>
+        {cards.map((card) => (
+          <Card key={card._id} card={card} />
+        ))}
       </section>
-
-      <dialog className="form__dialog popup_confirmation">
-        <div className="forms">
-          <h2 className="forms__title">¿Estás seguro/a?</h2>
-          <button
-            className="forms__submit-button"
-            id="confirmation-button"
-            title="confirma eliminacion"
-          >
-            Sin miedo al Exito !!!
-          </button>
-          <button
-            id="forms_delete_close_button"
-            className="forms__close-button close__button"
-            title="cerrar"
-            type="button"
-          >
-            <img
-              className="forms__image-button"
-              src="./images/formn_image.svg"
-              alt="imagen de una X"
-            />
-          </button>
-        </div>
-      </dialog>
+      <ImagePopup card={Card} onClose={handleClosePopup} />
 
       {popup && (
         <Popup onClose={handleClosePopup} title={popup.title}>

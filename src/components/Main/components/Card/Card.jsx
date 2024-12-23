@@ -1,12 +1,19 @@
 import trash from "../../../../images/Trash.png";
-const Card = (props) => {
-  const { name, link, isLiked } = props.card;
+const Card = ({ card, handleOpenPopup }) => {
+  {
+    /*const { link, name, isLiked, handleOpenPopup } = props.card;*/
+  }
 
   return (
-    <div>
-      <img className="element__image" src={link} alt={name} />
+    <div className="element">
+      <img
+        className="element__image"
+        src={card.link}
+        alt={card.name}
+        onClick={() => handleOpenPopup(imageComponent)}
+      />
       <div className="element__text">
-        <p className="element__title"> {name} </p>
+        <p className="element__title"> {card.name} </p>
         <button
           className="element__like"
           aria-label="Like card"
