@@ -2,12 +2,12 @@ import { useState } from "react";
 import avatar from "../../images/jacques-cousteau.jpg";
 import lapiz from "../../images/Edit_profile.png";
 import cruz from "../../images/boton_cruz.png";
-import EditProfile from "./Popup/EditProfile/EditProfile";
-import NewCard from "./Popup/Newcard/NewCard";
-import EditAvatar from "./Popup/EditAvatar/EditAvatar";
-import Popup from "./Popup/Popup";
-import Card from "../Main/components/Card/Card";
-import ImagePopup from "./Popup/ImagePopup/ImagePopup";
+import EditProfile from "../EditProfile/EditProfile";
+import NewCard from "../Newcard/NewCard";
+import EditAvatar from "../EditAvatar/EditAvatar";
+import Popup from "../Popup/Popup";
+import Card from "../Card/Card";
+import ImagePopup from "../ImagePopup/ImagePopup";
 
 const cards = [
   {
@@ -28,16 +28,7 @@ const cards = [
   },
 ];
 
-console.log(cards);
-
 const Main = () => {
-  const [popup, setPopup] = useState(null);
-  const editProfile = { title: "Editar Perfil", children: <EditProfile /> };
-  const newCard = { title: "Nuevo lugar", children: <NewCard /> };
-  const editAvatar = {
-    title: "Cambiar Foto de Perfil",
-    children: <EditAvatar />,
-  };
   const handleOpenPopUp = (newPopup) => {
     setPopup(newPopup);
   };
@@ -45,12 +36,25 @@ const Main = () => {
     setPopup(null);
   };
 
+  const [popup, setPopup] = useState(null);
+  const editProfile = () => ({
+    title: "Editar Perfil",
+    children: <EditProfile />,
+  });
+  const newCard = () => ({ title: "Nuevo lugar", children: <NewCard /> });
+  const editAvatar = () => ({
+    title: "Cambiar Foto de Perfil",
+    children: <EditAvatar />,
+  });
+
+  const [popupImage, setPopupImage] = useState(null);
+
   return (
     <main className="content">
       <section className="profile">
         <button
           className="profile_avatar"
-          onClick={() => handleOpenPopUp(editAvatar)}
+          onClick={() => handleOpenPopUp(editAvatar())}
         >
           <img
             className="profile__edit-avatar"
@@ -68,7 +72,7 @@ const Main = () => {
           <button
             className="profile__edit-button"
             title="Editar perfil"
-            onClick={() => handleOpenPopUp(editProfile)}
+            onClick={() => handleOpenPopUp(editProfile())}
           >
             <img
               className="profile__edit-image"
@@ -80,7 +84,7 @@ const Main = () => {
         <button
           className="profile__add-button"
           title="Crear tarjeta"
-          onClick={() => handleOpenPopUp(newCard)}
+          onClick={() => handleOpenPopUp(newCard())}
         >
           <img
             className="profile__image-button"
@@ -91,11 +95,21 @@ const Main = () => {
       </section>
       <section className="elements">
         {cards.map((card) => (
-          <Card key={card._id} card={card} />
+          <Card
+            key={card._id}
+            card={card}
+            handleOpenPopup={(selectCard) => {
+              setPopupImage(selectCard);
+            }}
+          />
         ))}
       </section>
-      <ImagePopup card={Card} onClose={handleClosePopup} />
-
+      <ImagePopup
+        card={popupImage}
+        onClose={() => {
+          setPopupImage(null);
+        }}
+      />
       {popup && (
         <Popup onClose={handleClosePopup} title={popup.title}>
           {popup.children}

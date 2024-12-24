@@ -35,15 +35,29 @@
   border: 0;
   background: transparent;
   outline: none;
-  padding: 50px;
+  display: block;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  z-index: 1000;
+  top: 0px;
+  right: 0px;
+  width: 100%;
+  height: 100%;
 }
-
+.popup_image-container {
+  position: relative;
+  right: 114px;
+  top: -375px;
+}
 .popup__close-button {
   width: 40px;
   height: 40px;
   padding: 0;
   border: none;
-  position: absolute;
+  position: relative;
   top: 8px;
   right: 8px;
   background: black;
@@ -61,6 +75,10 @@
 }
 
 .popup__description {
+  height: 100%;
+  right: 355px;
+  position: relative;
+  top: 792px;
   color: white;
   text-align: center;
 }

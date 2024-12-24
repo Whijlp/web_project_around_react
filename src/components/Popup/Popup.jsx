@@ -1,4 +1,4 @@
-import X from "../../../images/formn_image.svg";
+import X from "../../images/formn_image.svg";
 
 const Popup = (props) => {
   const { title, children, onClose } = props;

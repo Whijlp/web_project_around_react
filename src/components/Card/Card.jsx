@@ -1,8 +1,15 @@
-import trash from "../../../../images/Trash.png";
+import trash from "../../images/Trash.png";
 const Card = ({ card, handleOpenPopup }) => {
   {
     /*const { link, name, isLiked, handleOpenPopup } = props.card;*/
   }
+  const imageComponent = {
+    name: card.name,
+    link: card.link,
+  };
+  const handleClick = () => {
+    handleOpenPopup(imageComponent);
+  };
 
   return (
     <div className="element">
@@ -10,7 +17,7 @@ const Card = ({ card, handleOpenPopup }) => {
         className="element__image"
         src={card.link}
         alt={card.name}
-        onClick={() => handleOpenPopup(imageComponent)}
+        onClick={() => handleClick()}
       />
       <div className="element__text">
         <p className="element__title"> {card.name} </p>
