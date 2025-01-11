@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import avatar from "../../images/jacques-cousteau.jpg";
 import lapiz from "../../images/Edit_profile.png";
 import cruz from "../../images/boton_cruz.png";
@@ -8,27 +8,16 @@ import EditAvatar from "../EditAvatar/EditAvatar";
 import Popup from "../Popup/Popup";
 import Card from "../Card/Card";
 import ImagePopup from "../ImagePopup/ImagePopup";
+import CurrentUserContexts from "../../contexts/CurrentUserContexts";
+import  api  from "../../utils/Api/api.js";
 
-const cards = [
-  {
-    isLiked: false,
-    _id: "5d1f0611d321eb4bdcd707dd",
-    name: "Yosemite Valley",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_yosemite.jpg",
-    owner: "5d1f0611d321eb4bdcd707dd",
-    createdAt: "2019-07-05T08:10:57.741Z",
-  },
-  {
-    isLiked: false,
-    _id: "5d1f064ed321eb4bdcd707de",
-    name: "Lake Louise",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_lake-louise.jpg",
-    owner: "5d1f0611d321eb4bdcd707dd",
-    createdAt: "2019-07-05T08:11:58.324Z",
-  },
-];
+
 
 const Main = () => {
+
+  const[currentUser, setCurrentUser] = useState({});
+  const [cards, setCards] = useState([]);
+  const [popupImage, setPopupImage] = useState(null);
   const handleOpenPopUp = (newPopup) => {
     setPopup(newPopup);
   };
@@ -47,9 +36,27 @@ const Main = () => {
     children: <EditAvatar />,
   });
 
-  const [popupImage, setPopupImage] = useState(null);
+ const handleIsLikeCard = (cardId,isLiked) => {
+  if(isLiked){
+    api.deleteLikeCard(cardId).then((response)=> {
+      setCards((state) => {
+        return state.map((card)=>{card._id === response._id ? response : card})
+      })
+    })
+  }else{ api.likeCard(cardId).then((response)=> {
+ setCards((state) => {
+  return state.map((card)=>{card._id === response._id ? response : card})
+ })
+  })}};
+ 
+useEffect(() => {
+  api.getUserInfo().then((response) => {
+    setCurrentUser(response)}) 
+  api.getInitialCards().then((response) => {
+    setCards(response)}) },[])
 
   return (
+    <CurrentUserContexts.Provider value={currentUser} >
     <main className="content">
       <section className="profile">
         <button
@@ -66,8 +73,8 @@ const Main = () => {
 
         <div className="profile__info">
           <div className="profile__info-container">
-            <h2 className="profile__title">Jacques Cousteau</h2>
-            <p className="profile__subtitle">Explorador</p>
+            <h2 className="profile__title">{currentUser.name}</h2>
+            <p className="profile__subtitle">{currentUser.about}</p>
           </div>
           <button
             className="profile__edit-button"
@@ -101,6 +108,7 @@ const Main = () => {
             handleOpenPopup={(selectCard) => {
               setPopupImage(selectCard);
             }}
+            handleIsLikeCard={handleIsLikeCard}
           />
         ))}
       </section>
@@ -116,7 +124,9 @@ const Main = () => {
         </Popup>
       )}
     </main>
+    </CurrentUserContexts.Provider>
   );
+
 };
 
 export default Main;
