@@ -1,4 +1,19 @@
+import{useState, useContext} from "react"
+import CurrentUserContexts from "../../contexts/CurrentUserContexts";
+
 const EditProfile = () => {
+  const CurrentUserContexts = useContext(CurrentUserContexts)
+  const[name, setName] =useState(CurrentUser.name)
+  const [description, setDescription] = useState(currentUser.about)
+
+const handleNameChange = (evt)=>{
+  setName(evt.target.value)
+  
+  const handleDescriptionChange =(evt)=>{
+    setDescription(evt.target.value)
+  }
+}
+
   return (
     <form className="form" id="form_edit-profile">
       <fieldset className="form__edit">
@@ -11,6 +26,8 @@ const EditProfile = () => {
           placeholder="Nombre"
           minLength="2"
           maxLength="40"
+          value={name}
+          onChange={handleNameChange}
         />
         <span
           name="name-error"
@@ -26,6 +43,8 @@ const EditProfile = () => {
           placeholder="Descripcion"
           minLength="2"
           maxLength="200"
+          value={description}
+          onChange={handleDescriptionChange}
         />
         <span
           name="job_info-error"

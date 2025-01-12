@@ -1,5 +1,5 @@
 import trash from "../../images/Trash.png";
-const Card = ({ card, handleOpenPopup, handleIsLikeCard = {} }) => {
+const Card = ({ card, handleOpenPopup, handleIsLikeCard, onCardDelete = {} }) => {
   {
     /*const { link, name, isLiked, handleOpenPopup } = props.card;*/
   }
@@ -32,7 +32,7 @@ const Card = ({ card, handleOpenPopup, handleIsLikeCard = {} }) => {
           type="button"
           onClick={() => handleIsLikeCard(_id, isLiked)}
         ></button>
-        <button className="element__trash" title="eliminar" id="delete_button">
+        <button className="element__trash" title="eliminar" id="delete_button" onClick={()=>onCardDelete(_id)}>
           <img src={trash} alt="imagen de basurera" />
         </button>
       </div>

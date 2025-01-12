@@ -18,18 +18,17 @@ const Main = () => {
   const[currentUser, setCurrentUser] = useState({});
   const [cards, setCards] = useState([]);
   const [popupImage, setPopupImage] = useState(null);
+  const [popup, setPopup] = useState(null);
+  //-----------------------------------------------------------------------------------
   const handleOpenPopUp = (newPopup) => {
     setPopup(newPopup);
   };
   const handleClosePopup = () => {
     setPopup(null);
   };
-  const [popup, setPopup] = useState(null);
+ 
 
   const handleCreateCard = ({title, link}) => {
- 
- console.log(title)
- console.log(link)
     api.createCard({ name: title, link })
       .then((response) => {
         setCards((state) => [response, ...state]);
@@ -40,7 +39,6 @@ const Main = () => {
       });
   };
  
-
   const editProfile = () => ({
     title: "Editar Perfil",
     children: <EditProfile />,
@@ -64,6 +62,13 @@ const Main = () => {
  })
   })}};
  
+const handleDeleteCard =(cardId)=>{
+  api.deleteCard(cardId).then(() => {
+    setCards((state) => state.filter((card) => card._id !== cardId));
+  })
+
+}
+
  useEffect(() => {
   api.getUserInfo().then((response) => {
     setCurrentUser(response)}) 
@@ -124,6 +129,7 @@ const Main = () => {
               setPopupImage(selectCard);
             }}
             handleIsLikeCard={handleIsLikeCard}
+            onCardDelete={handleDeleteCard}
           />
         ))}
       </section>
