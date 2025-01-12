@@ -1,4 +1,14 @@
-const NewCard = () => {
+import { useState } from "react";
+
+const NewCard = (props) => {
+  const {handleCreateCard} = props;
+  const [title,setTitle] = useState('');
+  const [link,setLink] = useState('');  
+  const handleSubmitForm = (evt) => {
+    evt.preventDefault();
+    handleCreateCard({title, link});
+  }
+
   return (
     <form className="form" id="create-card">
       <fieldset className="form__edit">
@@ -11,6 +21,8 @@ const NewCard = () => {
           placeholder="Nueva tarjeta"
           minLength="2"
           maxLength="30"
+          value={title}
+          onChange={(evt) => setTitle(evt.target.value)}
         />
         <span
           name="titulo-error"
@@ -24,6 +36,9 @@ const NewCard = () => {
           type="url"
           id="photo_info"
           placeholder="Enlace de la imagen"
+          value={link}
+          onChange={(evt) => setLink(evt.target.value)}
+
         />
         <span
           name="photo_info-error"
@@ -32,11 +47,11 @@ const NewCard = () => {
         ></span>
       </fieldset>
       <button
-        disabled
         className="forms__submit-button"
         type="submit"
         title="Crear tarjeta nueva "
         id="create-button"
+        onClick={handleSubmitForm}
       >
         Crear
       </button>

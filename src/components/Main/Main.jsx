@@ -24,13 +24,28 @@ const Main = () => {
   const handleClosePopup = () => {
     setPopup(null);
   };
-
   const [popup, setPopup] = useState(null);
+
+  const handleCreateCard = ({title, link}) => {
+ 
+ console.log(title)
+ console.log(link)
+    api.createCard({ name: title, link })
+      .then((response) => {
+        setCards((state) => [response, ...state]);
+        setPopup(null);
+      })
+      .catch((error) => {
+        console.error("Error creating card:", error);
+      });
+  };
+ 
+
   const editProfile = () => ({
     title: "Editar Perfil",
     children: <EditProfile />,
   });
-  const newCard = () => ({ title: "Nuevo lugar", children: <NewCard /> });
+  const newCard = () => ({ title: "Nuevo lugar", children: <NewCard handleCreateCard={handleCreateCard}/> });
   const editAvatar = () => ({
     title: "Cambiar Foto de Perfil",
     children: <EditAvatar />,
@@ -40,20 +55,20 @@ const Main = () => {
   if(isLiked){
     api.deleteLikeCard(cardId).then((response)=> {
       setCards((state) => {
-        return state.map((card)=>{card._id === response._id ? response : card})
+        return state.map((card)=>card._id === response._id ? response : card)
       })
     })
   }else{ api.likeCard(cardId).then((response)=> {
  setCards((state) => {
-  return state.map((card)=>{card._id === response._id ? response : card})
+  return state.map((card)=>card._id === response._id ? response : card)
  })
   })}};
  
-useEffect(() => {
+ useEffect(() => {
   api.getUserInfo().then((response) => {
     setCurrentUser(response)}) 
   api.getInitialCards().then((response) => {
-    setCards(response)}) },[])
+    setCards(response || [])}) },[])
 
   return (
     <CurrentUserContexts.Provider value={currentUser} >

@@ -34,7 +34,7 @@ const EditProfile = () => {
         ></span>
       </fieldset>
       <button
-        disabled
+        
         className="forms__submit-button"
         id="perfil-button"
         title="Guardar cambios"
