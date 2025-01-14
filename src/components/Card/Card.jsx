@@ -1,8 +1,9 @@
 import trash from "../../images/Trash.png";
-const Card = ({ card, handleOpenPopup, handleIsLikeCard, onCardDelete = {} }) => {
+const Card = ({ card, handleOpenPopup, handleIsLikeCard, onCardDelete= {}}) => {
   {
     /*const { link, name, isLiked, handleOpenPopup } = props.card;*/
   }
+  
   const { link = "", name = "" ,_id,isLiked} = card;
   const imageComponent = {
     name,
@@ -30,7 +31,7 @@ const Card = ({ card, handleOpenPopup, handleIsLikeCard, onCardDelete = {} }) =>
           className={cardLikeButtonClassName}
           aria-label="Like card"
           type="button"
-          onClick={() => handleIsLikeCard(_id, isLiked)}
+          onClick={(_id) => handleIsLikeCard(_id, isLiked)}
         ></button>
         <button className="element__trash" title="eliminar" id="delete_button" onClick={()=>onCardDelete(_id)}>
           <img src={trash} alt="imagen de basurera" />

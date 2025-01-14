@@ -10,65 +10,47 @@ import Card from "../Card/Card";
 import ImagePopup from "../ImagePopup/ImagePopup";
 import CurrentUserContexts from "../../contexts/CurrentUserContexts";
 import  api  from "../../utils/Api/api.js";
+import PopupWhitConfirmation from "../PopupWhitConfirmation/PopupWhitConfirmation.jsx";
 
 
-
-const Main = () => {
+const Main = ({cards, handleCreateCard, handleIsLikeCard, handleDeleteCard,setCards}) => {
 
   const[currentUser, setCurrentUser] = useState({});
-  const [cards, setCards] = useState([]);
   const [popupImage, setPopupImage] = useState(null);
   const [popup, setPopup] = useState(null);
+
   //-----------------------------------------------------------------------------------
+  
   const handleOpenPopUp = (newPopup) => {
-    setPopup(newPopup);
+   setPopup(newPopup);
+    
   };
   const handleClosePopup = () => {
     setPopup(null);
   };
- 
 
-  const handleCreateCard = ({title, link}) => {
-    api.createCard({ name: title, link })
-      .then((response) => {
-        setCards((state) => [response, ...state]);
-        setPopup(null);
-      })
-      .catch((error) => {
-        console.error("Error creating card:", error);
-      });
-  };
- 
+  const popupWhitConfirmation =(_id)=> setPopup(_id)  
+  
+  const newCard = () => ({ title: "Nuevo lugar", children: <NewCard handleCreateCard={()=>{handleCreateCard()
+    setPopup(null)
+  }}/> });
+  
+  const handleChangeAvatar = (avatar) => {api.editAvatarUser({avatar:avatar}).then((response) => {
+    console.log(response);
+    setCurrentUser(response); setPopup(null) })
+};
+  const handleUpdateUser = (data)=>{api.editUserInfo(data).then((response) => {setCurrentUser(response);setPopup(null)})
+  }
+  const editAvatar = () => ({
+    title: "Cambiar Foto de Perfil",
+    children: <EditAvatar handleChangeAvatar={handleChangeAvatar} />,
+  });
+
   const editProfile = () => ({
     title: "Editar Perfil",
     children: <EditProfile />,
   });
-  const newCard = () => ({ title: "Nuevo lugar", children: <NewCard handleCreateCard={handleCreateCard}/> });
-  const editAvatar = () => ({
-    title: "Cambiar Foto de Perfil",
-    children: <EditAvatar />,
-  });
-
- const handleIsLikeCard = (cardId,isLiked) => {
-  if(isLiked){
-    api.deleteLikeCard(cardId).then((response)=> {
-      setCards((state) => {
-        return state.map((card)=>card._id === response._id ? response : card)
-      })
-    })
-  }else{ api.likeCard(cardId).then((response)=> {
- setCards((state) => {
-  return state.map((card)=>card._id === response._id ? response : card)
- })
-  })}};
- 
-const handleDeleteCard =(cardId)=>{
-  api.deleteCard(cardId).then(() => {
-    setCards((state) => state.filter((card) => card._id !== cardId));
-  })
-
-}
-
+  
  useEffect(() => {
   api.getUserInfo().then((response) => {
     setCurrentUser(response)}) 
@@ -76,8 +58,9 @@ const handleDeleteCard =(cardId)=>{
     setCards(response || [])}) },[])
 
   return (
-    <CurrentUserContexts.Provider value={currentUser} >
+    <CurrentUserContexts.Provider value={{currentUser, handleUpdateUser}} >
     <main className="content">
+     { popup && <PopupWhitConfirmation popup={popup} handleDeleteCard={handleDeleteCard} />}
       <section className="profile">
         <button
           className="profile_avatar"
@@ -88,7 +71,7 @@ const handleDeleteCard =(cardId)=>{
             src={lapiz}
             alt="Vector de lapiz"
           />
-          <img className="profile_image" src={avatar} alt="foto de perfil" />
+          <img className="profile_image" src={currentUser.avatar} alt="foto de perfil" />
         </button>
 
         <div className="profile__info">
@@ -129,7 +112,8 @@ const handleDeleteCard =(cardId)=>{
               setPopupImage(selectCard);
             }}
             handleIsLikeCard={handleIsLikeCard}
-            onCardDelete={handleDeleteCard}
+            onCardDelete={popupWhitConfirmation}
+
           />
         ))}
       </section>

@@ -2,20 +2,26 @@ import{useState, useContext} from "react"
 import CurrentUserContexts from "../../contexts/CurrentUserContexts";
 
 const EditProfile = () => {
-  const CurrentUserContexts = useContext(CurrentUserContexts)
-  const[name, setName] =useState(CurrentUser.name)
+
+  //const CurrentUserContext = useContext(CurrentUserContexts)
+ const { currentUser, handleUpdateUser } = useContext(CurrentUserContexts);
+  const[name, setName] =useState(currentUser.name)
   const [description, setDescription] = useState(currentUser.about)
 
-const handleNameChange = (evt)=>{
+const handleNameChange = (evt) => {
   setName(evt.target.value)
   
-  const handleDescriptionChange =(evt)=>{
-    setDescription(evt.target.value)
-  }
+}
+const handleDescriptionChange = (evt) => {
+  setDescription(evt.target.value)
 }
 
+const handleSubmit = (event) => {
+  event.preventDefault(); 
+  handleUpdateUser({ name, about: description }); 
+};
   return (
-    <form className="form" id="form_edit-profile">
+    <form className="form" id="form_edit-profile" onSubmit={handleSubmit}>
       <fieldset className="form__edit">
         <input
           required

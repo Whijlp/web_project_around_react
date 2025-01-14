@@ -1,24 +1,25 @@
-import X from "../../../images/formn_image.svg";
-const PopupWhitConfirmation = () => {
-  return (
-    <div className="forms">
-      <h2 className="forms__title">¿Estás seguro/a?</h2>
+import Popup from "../Popup/Popup";
+
+const PopupWhitConfirmation = (props) => {
+  const { card, popup, onCardDelete, handleDeleteCard} = props;
+
+  const handleConfirmation = (evt) => {
+    evt.preventDefault();
+    handleDeleteCard(popup);
+    onCardDelete(card._id); 
+    popup(null); }
+
+    return (
+    <Popup title="¿Estás seguro/a?" onClose={popup}>
       <button
         className="forms__submit-button"
         id="confirmation-button"
         title="confirma eliminacion"
+        onClick={handleConfirmation}
       >
         Sin miedo al Exito !!!
       </button>
-      <button
-        id="forms_delete_close_button"
-        className="forms__close-button close__button"
-        title="cerrar"
-        type="button"
-      >
-        <img className="forms__image-button" src={x} alt="imagen de una X" />
-      </button>
-    </div>
+    </Popup>
   );
 };
 export default PopupWhitConfirmation;
