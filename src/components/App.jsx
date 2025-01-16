@@ -24,14 +24,16 @@ function App() {
       setCards((state) => state.filter((card) => card._id !== cardId));
     })}
 
-  const handleCreateCard = ({title, link}) => {
-    api.createCard({ name: title, link })
+  const handleCreateCard = (title, link) => {
+    console.log(title)
+    console.log(link)
+    api.createCard({name:title,link})
       .then((response) => {
         setCards((state) => [response, ...state]);
         
-      })
-      .catch((error) => {
-        console.error("Error creating card:", error);
+       })
+       .catch((error) => {
+         console.error("Error creating card:", error);
       });
   };
 

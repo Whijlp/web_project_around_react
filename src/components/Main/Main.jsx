@@ -18,7 +18,8 @@ const Main = ({cards, handleCreateCard, handleIsLikeCard, handleDeleteCard,setCa
   const[currentUser, setCurrentUser] = useState({});
   const [popupImage, setPopupImage] = useState(null);
   const [popup, setPopup] = useState(null);
-
+  const [popupDelete, setPopupDelete] = useState(null);
+  const[currentCard, setCurrentCard] = useState({});
   //-----------------------------------------------------------------------------------
   
   const handleOpenPopUp = (newPopup) => {
@@ -29,7 +30,7 @@ const Main = ({cards, handleCreateCard, handleIsLikeCard, handleDeleteCard,setCa
     setPopup(null);
   };
 
-  const popupWhitConfirmation =(_id)=> setPopup(_id)  
+  //const popupWhitConfirmation =(cards)=> setPopup(cards)  
   
   const newCard = () => ({ title: "Nuevo lugar", children: <NewCard handleCreateCard={()=>{handleCreateCard()
     setPopup(null)
@@ -60,7 +61,7 @@ const Main = ({cards, handleCreateCard, handleIsLikeCard, handleDeleteCard,setCa
   return (
     <CurrentUserContexts.Provider value={{currentUser, handleUpdateUser}} >
     <main className="content">
-     { popup && <PopupWhitConfirmation popup={popup} handleDeleteCard={handleDeleteCard} />}
+     { popupDelete && <PopupWhitConfirmation setPopup={setPopupDelete} handleDeleteCard={handleDeleteCard} card={currentCard}  />}
       <section className="profile">
         <button
           className="profile_avatar"
@@ -112,7 +113,7 @@ const Main = ({cards, handleCreateCard, handleIsLikeCard, handleDeleteCard,setCa
               setPopupImage(selectCard);
             }}
             handleIsLikeCard={handleIsLikeCard}
-            onCardDelete={popupWhitConfirmation}
+            onCardDelete={()=>{setPopupDelete(true); setCurrentCard(card)} }
 
           />
         ))}
