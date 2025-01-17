@@ -1,9 +1,6 @@
 import trash from "../../images/Trash.png";
 const Card = ({ card, handleOpenPopup, handleIsLikeCard, onCardDelete= {}}) => {
-  {
-    /*const { link, name, isLiked, handleOpenPopup } = props.card;*/
-  }
-  
+   
   const { link = "", name = "" ,_id,isLiked} = card;
   const imageComponent = {
     name,

@@ -29,8 +29,6 @@ const Main = ({cards, handleCreateCard, handleIsLikeCard, handleDeleteCard,setCa
   const handleClosePopup = () => {
     setPopup(null);
   };
-
-  //const popupWhitConfirmation =(cards)=> setPopup(cards)  
   
   const newCard = () => ({ title: "Nuevo lugar", children: <NewCard handleCreateCard={({title,link})=>{handleCreateCard(title,link)
     setPopup(null)
