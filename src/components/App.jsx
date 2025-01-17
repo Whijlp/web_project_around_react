@@ -30,7 +30,6 @@ function App() {
     api.createCard({name:title,link})
       .then((response) => {
         setCards((state) => [response, ...state]);
-        
        })
        .catch((error) => {
          console.error("Error creando card:", error);
