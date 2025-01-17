@@ -1,14 +1,12 @@
-
 import { useRef } from "react";
 
-
 const EditAvatar = (props) => {
-  const {handleChangeAvatar} = props
-  const inputAvatarRef = useRef(null)
-  const handleSubmitForm =(evt)=>{
-    evt.preventDefault()
-    handleChangeAvatar(inputAvatarRef?.current.value)
-  }
+  const { handleChangeAvatar } = props;
+  const inputAvatarRef = useRef(null);
+  const handleSubmitForm = (evt) => {
+    evt.preventDefault();
+    handleChangeAvatar(inputAvatarRef?.current.value);
+  };
   return (
     <form className="form" id="form_edit-avatar">
       <fieldset className="form__edit">
@@ -28,7 +26,7 @@ const EditAvatar = (props) => {
           className="form__input-error-span"
         ></span>
         <button
-        onClick={handleSubmitForm}
+          onClick={handleSubmitForm}
           className="forms__submit-button"
           id="perfil-button"
           title="Guardar cambios"

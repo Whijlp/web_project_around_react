@@ -1,7 +1,12 @@
 import trash from "../../images/Trash.png";
-const Card = ({ card, handleOpenPopup, handleIsLikeCard, onCardDelete= {}}) => {
-   
-  const { link = "", name = "" ,_id,isLiked} = card;
+
+const Card = ({
+  card,
+  handleOpenPopup,
+  handleIsLikeCard,
+  onCardDelete = {},
+}) => {
+  const { link = "", name = "", _id, isLiked } = card;
   const imageComponent = {
     name,
     link,
@@ -11,7 +16,7 @@ const Card = ({ card, handleOpenPopup, handleIsLikeCard, onCardDelete= {}}) => {
   };
 
   const cardLikeButtonClassName = `element__like ${
-    isLiked ? 'element__like-active' : ''
+    isLiked ? "element__like-active" : ""
   }`;
 
   return (
@@ -30,7 +35,12 @@ const Card = ({ card, handleOpenPopup, handleIsLikeCard, onCardDelete= {}}) => {
           type="button"
           onClick={() => handleIsLikeCard(_id, isLiked)}
         ></button>
-        <button className="element__trash" title="eliminar" id="delete_button" onClick={()=>onCardDelete(_id)}>
+        <button
+          className="element__trash"
+          title="eliminar"
+          id="delete_button"
+          onClick={() => onCardDelete(_id)}
+        >
           <img src={trash} alt="imagen de basurera" />
         </button>
       </div>

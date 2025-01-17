@@ -1,11 +1,12 @@
 import X from "../../images/formn_image.svg";
+
 const ImagePopup = ({ card, onClose }) => {
   if (!card) return null;
 
   return (
     <div className={card ? "popup_dialog" : ""}>
-      <img className="popup__img" src={card.link} alt={card.name} />
       <div className="popup_image-container">
+      <img className="popup__img" src={card.link} alt={card.name}  />
         <button
           className="forms__close-button close__button"
           id="place-close-button"

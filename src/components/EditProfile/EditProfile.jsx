@@ -1,25 +1,23 @@
-import{useState, useContext} from "react"
+import { useState, useContext } from "react";
 import CurrentUserContexts from "../../contexts/CurrentUserContext";
 
 const EditProfile = () => {
-
   //const CurrentUserContext = useContext(CurrentUserContexts)
- const { currentUser, handleUpdateUser } = useContext(CurrentUserContexts);
-  const[name, setName] =useState(currentUser.name)
-  const [description, setDescription] = useState(currentUser.about)
+  const { currentUser, handleUpdateUser } = useContext(CurrentUserContexts);
+  const [name, setName] = useState(currentUser.name);
+  const [description, setDescription] = useState(currentUser.about);
 
-const handleNameChange = (evt) => {
-  setName(evt.target.value)
-  
-}
-const handleDescriptionChange = (evt) => {
-  setDescription(evt.target.value)
-}
+  const handleNameChange = (evt) => {
+    setName(evt.target.value);
+  };
+  const handleDescriptionChange = (evt) => {
+    setDescription(evt.target.value);
+  };
 
-const handleSubmit = (event) => {
-  event.preventDefault(); 
-  handleUpdateUser({ name, about: description }); 
-};
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    handleUpdateUser({ name, about: description });
+  };
   return (
     <form className="form" id="form_edit-profile" onSubmit={handleSubmit}>
       <fieldset className="form__edit">
@@ -59,7 +57,6 @@ const handleSubmit = (event) => {
         ></span>
       </fieldset>
       <button
-        
         className="forms__submit-button"
         id="perfil-button"
         title="Guardar cambios"
