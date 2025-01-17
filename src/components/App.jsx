@@ -4,6 +4,7 @@ import Footer from "./Footer/Footer";
 import { useState } from "react";
 import api from "../utils/Api/api";
 import CurrentUserContexts from "../contexts/CurrentUserContext";
+import { useEffect } from "react";
 
 function App() {
   const [currentUser, setCurrentUser] = useState({});
@@ -46,6 +47,25 @@ function App() {
       });
   };
 
+  const handleChangeAvatar = (avatar) => {
+    return api.editAvatarUser({ avatar: avatar }).then((response) => {
+      return setCurrentUser(response);
+    });
+  };
+  const handleUpdateUser = (data) => {
+    return api.editUserInfo(data).then((response) => {
+      return setCurrentUser(response);
+    });
+  };
+
+  useEffect(() => {
+    api.getUserInfo().then((response) => {
+      setCurrentUser(response);
+    });
+    api.getInitialCards().then((response) => {
+      setCards(response || []);
+    });
+  }, []);
   return (
     <CurrentUserContexts.Provider value={{ currentUser }}>
       <div className="page">
@@ -58,6 +78,8 @@ function App() {
           handleDeleteCard={handleDeleteCard}
           currentUser={currentUser}
           setCurrentUser={setCurrentUser}
+          handleChangeAvatar={handleChangeAvatar}
+          handleUpdateUser={handleUpdateUser}
         />
         <Footer />
       </div>
