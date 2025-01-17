@@ -8,7 +8,7 @@ import EditAvatar from "../EditAvatar/EditAvatar";
 import Popup from "../Popup/Popup";
 import Card from "../Card/Card";
 import ImagePopup from "../ImagePopup/ImagePopup";
-import CurrentUserContexts from "../../contexts/CurrentUserContexts";
+import CurrentUserContexts from "../../contexts/CurrentUserContext.js";
 import  api  from "../../utils/Api/api.js";
 import PopupWhitConfirmation from "../PopupWhitConfirmation/PopupWhitConfirmation.jsx";
 

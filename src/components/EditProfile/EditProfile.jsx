@@ -1,5 +1,5 @@
 import{useState, useContext} from "react"
-import CurrentUserContexts from "../../contexts/CurrentUserContexts";
+import CurrentUserContexts from "../../contexts/CurrentUserContext";
 
 const EditProfile = () => {
 
