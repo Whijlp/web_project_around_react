@@ -2,7 +2,6 @@ import { useState, useContext } from "react";
 import CurrentUserContexts from "../../contexts/CurrentUserContext";
 
 const EditProfile = ({handleUpdateUser}) => {
-  //const CurrentUserContext = useContext(CurrentUserContexts)
   const { currentUser} = useContext(CurrentUserContexts);
   const [name, setName] = useState(currentUser.name);
   const [description, setDescription] = useState(currentUser.about);

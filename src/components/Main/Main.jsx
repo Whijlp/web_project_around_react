@@ -1,4 +1,4 @@
-import {  useState } from "react";
+import { useState } from "react";
 import lapiz from "../../images/Edit_profile.png";
 import cruz from "../../images/boton_cruz.png";
 import EditProfile from "../EditProfile/EditProfile";
@@ -31,18 +31,6 @@ const Main = ({
     setPopup(null);
   };
 
-  const newCard = () => ({
-    title: "Nuevo lugar",
-    children: (
-      <NewCard
-        handleCreateCard={({ title, link }) => {
-          handleCreateCard(title, link);
-          setPopup(null);
-        }}
-      />
-    ),
-  });
-
   const handleChangeAvatarClose = (avatar) => {
     console.log(avatar);
     handleChangeAvatar(avatar).then(() => {
@@ -55,6 +43,18 @@ const Main = ({
       setPopup(null);
     });
   };
+
+  const newCard = () => ({
+    title: "Nuevo lugar",
+    children: (
+      <NewCard
+        handleCreateCard={({ title, link }) => {
+          handleCreateCard(title, link);
+          setPopup(null);
+        }}
+      />
+    ),
+  });
 
   const editAvatar = () => ({
     title: "Cambiar Foto de Perfil",
