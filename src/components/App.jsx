@@ -9,12 +9,15 @@ function App() {
 
   const handleIsLikeCard = (cardId,isLiked) => {
     if(isLiked){
+
       api.deleteLikeCard(cardId).then((response)=> {
         setCards((state) => {
           return state.map((card)=>card._id === response._id ? response : card)
         })
       })
-    }else{ api.likeCard(cardId).then((response)=> {
+    }else {
+  console.log(cardId)
+       api.likeCard(cardId).then((response)=> {
    setCards((state) => {
     return state.map((card)=>card._id === response._id ? response : card)
    }) })}};

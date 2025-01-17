@@ -32,7 +32,7 @@ const Main = ({cards, handleCreateCard, handleIsLikeCard, handleDeleteCard,setCa
 
   //const popupWhitConfirmation =(cards)=> setPopup(cards)  
   
-  const newCard = () => ({ title: "Nuevo lugar", children: <NewCard handleCreateCard={()=>{handleCreateCard()
+  const newCard = () => ({ title: "Nuevo lugar", children: <NewCard handleCreateCard={({title,link})=>{handleCreateCard(title,link)
     setPopup(null)
   }}/> });
   

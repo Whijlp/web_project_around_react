@@ -1,6 +1,7 @@
 
 import { useRef } from "react";
 
+
 const EditAvatar = (props) => {
   const {handleChangeAvatar} = props
   const inputAvatarRef = useRef(null)
