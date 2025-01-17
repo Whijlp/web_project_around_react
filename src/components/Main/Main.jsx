@@ -37,7 +37,7 @@ const Main = ({cards, handleCreateCard, handleIsLikeCard, handleDeleteCard,setCa
   }}/> });
   
   const handleChangeAvatar = (avatar) => {api.editAvatarUser({avatar:avatar}).then((response) => {
-    console.log(response);
+   
     setCurrentUser(response); setPopup(null) })
 };
   const handleUpdateUser = (data)=>{api.editUserInfo(data).then((response) => {setCurrentUser(response);setPopup(null)})

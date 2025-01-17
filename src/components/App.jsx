@@ -9,14 +9,13 @@ function App() {
 
   const handleIsLikeCard = (cardId,isLiked) => {
     if(isLiked){
-
       api.deleteLikeCard(cardId).then((response)=> {
         setCards((state) => {
           return state.map((card)=>card._id === response._id ? response : card)
         })
       })
     }else {
-  console.log(cardId)
+  
        api.likeCard(cardId).then((response)=> {
    setCards((state) => {
     return state.map((card)=>card._id === response._id ? response : card)
@@ -28,15 +27,13 @@ function App() {
     })}
 
   const handleCreateCard = (title, link) => {
-    console.log(title)
-    console.log(link)
     api.createCard({name:title,link})
       .then((response) => {
         setCards((state) => [response, ...state]);
         
        })
        .catch((error) => {
-         console.error("Error creating card:", error);
+         console.error("Error creando card:", error);
       });
   };
 
