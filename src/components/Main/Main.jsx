@@ -20,7 +20,6 @@ const Main = ({
   handleChangeAvatar,
 }) => {
   const {currentUser} =useContext(CurrentUserContexts);
-  console.log(currentUser);
   const [popupImage, setPopupImage] = useState(null);
   const [popup, setPopup] = useState(null);
   const [popupDelete, setPopupDelete] = useState(null);
