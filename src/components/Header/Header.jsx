@@ -1,4 +1,4 @@
-import vector from "../../images/vector.png";
+import vector from "../../images/Vector.png";
 const Header = () => {
   return (
     <header className="header">
