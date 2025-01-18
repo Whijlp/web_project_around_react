@@ -1,10 +1,10 @@
 import Header from "./Header/Header";
 import Main from "./Main/Main";
 import Footer from "./Footer/Footer";
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import api from "../utils/Api/api";
 import CurrentUserContexts from "../contexts/CurrentUserContext";
-import { useEffect } from "react";
+
 
 function App() {
   const [currentUser, setCurrentUser] = useState({});
@@ -76,7 +76,6 @@ function App() {
           handleCreateCard={handleCreateCard}
           handleIsLikeCard={handleIsLikeCard}
           handleDeleteCard={handleDeleteCard}
-          currentUser={currentUser}
           setCurrentUser={setCurrentUser}
           handleChangeAvatar={handleChangeAvatar}
           handleUpdateUser={handleUpdateUser}

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import lapiz from "../../images/Edit_profile.png";
 import cruz from "../../images/boton_cruz.png";
 import EditProfile from "../EditProfile/EditProfile";
@@ -8,16 +8,19 @@ import Popup from "../Popup/Popup";
 import Card from "../Card/Card";
 import ImagePopup from "../ImagePopup/ImagePopup";
 import PopupWhitConfirmation from "../PopupWhitConfirmation/PopupWhitConfirmation.jsx";
+import CurrentUserContexts from "../../contexts/CurrentUserContext";
+
 
 const Main = ({
   cards,
   handleCreateCard,
   handleIsLikeCard,
   handleDeleteCard,
-  currentUser,
   handleUpdateUser,
   handleChangeAvatar,
 }) => {
+  const {currentUser} =useContext(CurrentUserContexts);
+  console.log(currentUser);
   const [popupImage, setPopupImage] = useState(null);
   const [popup, setPopup] = useState(null);
   const [popupDelete, setPopupDelete] = useState(null);
