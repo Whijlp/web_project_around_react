@@ -1,13 +1,31 @@
 import { useState } from "react";
 
+
 const NewCard = (props) => {
-  const {handleCreateCard} = props;
-  const [title,setTitle] = useState('');
-  const [link,setLink] = useState('');  
+  const { handleCreateCard } = props;
+  const [title, setTitle] = useState("");
+  const [link, setLink] = useState("");
   const handleSubmitForm = (evt) => {
     evt.preventDefault();
-    handleCreateCard({title, link});
-  }
+    const validatedTitle = title.trim() !== "" ? title : "❌sin título❌";
+    const validatedLink =
+      link.trim() !== ""
+        ? link
+        : "https://i.pinimg.com/736x/35/6e/40/356e403878f3694ab491b406e49bdfd7.jpg";
+
+    handleCreateCard({ title: validatedTitle, link: validatedLink });
+
+    setTitle("");
+    setLink("");
+  };
+
+  const titleCard = (evt) => {
+    setTitle(evt.target.value);
+  };
+
+  const linkCard = (evt) => {
+    setLink(evt.target.value);
+  };
 
   return (
     <form className="form" id="create-card">
@@ -22,7 +40,7 @@ const NewCard = (props) => {
           minLength="2"
           maxLength="30"
           value={title}
-          onChange={(evt) => setTitle(evt.target.value)}
+          onChange={titleCard}
         />
         <span
           name="titulo-error"
@@ -37,12 +55,11 @@ const NewCard = (props) => {
           id="photo_info"
           placeholder="Enlace de la imagen"
           value={link}
-          onChange={(evt) => setLink(evt.target.value)}
-
+          onChange={linkCard}
         />
         <span
           name="photo_info-error"
-          id="photo_info-error"
+          id="form_photo_info-error"
           className="form__input-error-span"
         ></span>
       </fieldset>

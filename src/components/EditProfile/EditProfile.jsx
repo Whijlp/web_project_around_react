@@ -17,6 +17,8 @@ const EditProfile = ({handleUpdateUser}) => {
     event.preventDefault();
     handleUpdateUser({ name, about: description });
   };
+
+
   return (
     <form className="form" id="form_edit-profile" onSubmit={handleSubmit}>
       <fieldset className="form__edit">
