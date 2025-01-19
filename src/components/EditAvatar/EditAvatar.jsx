@@ -5,7 +5,16 @@ const EditAvatar = (props) => {
   const inputAvatarRef = useRef(null);
   const handleSubmitForm = (evt) => {
     evt.preventDefault();
-    handleChangeAvatar(inputAvatarRef?.current.value);
+    const avatarValue = inputAvatarRef.current.value.trim();
+
+    if (!avatarValue) {
+      alert("Por favor, introduce una URL válida para el avatar.");
+      return;
+    }
+
+    handleChangeAvatar(avatarValue);
+
+    inputAvatarRef.current.value = "";
   };
   return (
     <form className="form" id="form_edit-avatar">
