@@ -7,13 +7,11 @@ const NewCard = (props) => {
   const [link, setLink] = useState("");
   const handleSubmitForm = (evt) => {
     evt.preventDefault();
-    const validatedTitle = title.trim() !== "" ? title : "❌sin título❌";
-    const validatedLink =
-      link.trim() !== ""
-        ? link
-        : "https://i.pinimg.com/736x/35/6e/40/356e403878f3694ab491b406e49bdfd7.jpg";
-
-    handleCreateCard({ title: validatedTitle, link: validatedLink });
+  
+    if(title==="" || link===""){ 
+      alert("Por favor, rellena todos los campos");
+     }else{handleCreateCard({ title, link });} 
+    
 
     setTitle("");
     setLink("");
@@ -64,6 +62,7 @@ const NewCard = (props) => {
         ></span>
       </fieldset>
       <button
+
         className="forms__submit-button"
         type="submit"
         title="Crear tarjeta nueva "
